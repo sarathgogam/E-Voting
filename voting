@@ -1,0 +1,191 @@
+
+<%
+
+	//Checking session
+	if((String)session.getAttribute("vid") == null){
+		response.sendRedirect("voterLogin.jsp");
+	}
+	
+%>
+
+<!DOCTYPE html>
+<%@page import="com.nacre.evoting.daoImp.CandidateListDaoImp"%>
+<%@page import="com.nacre.evoting.daoImp.GetUserId"%>
+<%@ page errorPage="error.jsp" %>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Home | Voting</title>
+<link rel="stylesheet" href="./css/bootstrap.min.css"/>
+<link rel="stylesheet" href="./css/index_css.css"/>
+<link rel="stylesheet" href="./css/bootstrap.min.css"/>
+<script src="./js/jquery.min.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
+<script src="jquery.min.js"></script>
+  <script src="bootstrap.min.js"></script>
+  <script src="./js/jquery-3.3.1.min.js"></script>
+ 
+  
+  <style>
+  body{
+
+  background-color: #cccccc;
+  height: 500px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.w3-example{
+margin-left:20%;
+width:60%;
+background-color:#f1f1f1;padding:0.01em 16px;margin:0px 20%;box-shadow:0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important}
+
+table, th, td {
+  border: 0px solid white ;
+  padding:5px
+  
+}
+table{
+	width:100%;
+
+	margin:10px;
+}
+table{
+	width:60%;
+	margin-left:20%;
+}
+.photo{
+	width:40px;
+	height:40px;
+	border-radius:50%;
+}
+  
+  
+  </style>
+</head>
+<body>
+
+<script>
+var selectedCandidate;
+$(document).ready(function () {
+
+	  
+	  $("input[type='radio']").click(function(){
+		  selectedCandidate = $(this).val();
+		 	$('#result').val(selectedCandidate);
+		  $('#giveVote').attr('disabled',false);
+	   });
+	  
+	 // $('#giveVote').click(function(){
+		  
+		
+		// s.get("./VotingController",function(data){
+			//  alert("completed");
+		  //});
+	  //});
+
+	});
+</script>
+<%@ page import ="java.util.*" %>
+<%@ page import ="com.nacre.evoting.dto.*" %>
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="Home.jsp"><img src="./images/home_icon.png" height =30px width=50px></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="Home.jsp" class="active">Home</a></li>
+        
+        <li><a href="applyVoter.jsp" id="applyVoter">Apply Voter</a></li>
+		
+		<li><a href="candidateListUser.jsp">Candidate List</a></li>
+		<li><a href="GiveVoteController">Give Vote</a></li>
+		<li><a href="ViewResultsUserController">View Results</a></li>
+		<li><a href="checkVote.jsp">Check Vote</a></li>
+		<li><a href="">Contact Us</a></li>
+		<li><a href="VoterLogOutController" id="">Log Out</a></li>
+       </ul>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<%! int cid;%>
+Welcome, <%= session.getAttribute("vid")%>
+<center><span style="color:green"><h3><i>Welcome to Voting</i></h3></span></center>
+
+<div class="">
+
+			<table>
+<%
+	response.setContentType("text/html");
+	List<CandidateListDto> list = new CandidateListDaoImp().getCaldidateList();
+    for(CandidateListDto c : list){
+    	%>
+    	
+    	
+				<tr class="w3-example">
+					<td>
+					<%
+						//photo
+    					out.print("<img src='viewCandidate.jsp?cid="+c.getId()+"&type=photo' class='photo' alt='' >");
+    				%>
+					</td>
+					<td><%= c.getName() %></td>
+					<td><%= c.getPartyName() %></td>
+					<td>
+					
+					<%
+						//party symbol
+    					out.print("<img src='viewCandidate.jsp?cid="+c.getId()+"&type=party' class='photo' alt='' ");
+    				%>
+					
+					</td>
+					<td><span style="color:green; width:30px height:30px">
+						<%
+							
+							out.print("<input type='radio'  value='"+c.getId()+"'  name='candidate'/>");
+						%>
+						</span></td>
+				</tr>
+			
+			
+
+
+    	
+    	<%
+    	
+    	%>
+    	
+    	</div>
+    	<%
+    }
+%>
+<br>
+</table>
+
+
+</div>
+<center>
+<form action="VotingController">
+<input id = "result" name = "cid" type="text" value="" hidden/>
+<input  style="margin:30px;"type = "submit"  id='giveVote' class='btn btn-primary' disabled='true' value="Give Vote">    </button>
+</form>
+</center>
+
+
+    		
+    
+</body>
+</html>
