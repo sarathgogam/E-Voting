@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" href="./css/bootstrap.min.css"/>
+<link rel="stylesheet" href="./css/index_css.css"/>
+<script src="jquery.min.js"></script>
+  <script src="bootstrap.min.js"></script>
+  <script src="./js/jquery-3.3.1.min.js"></script>
+ 
+  
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><img src="./images/home_icon.png" height =30px width=50px></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="index.html" id="home" class="active">Home</a></li>
+        
+       <li><a href="voterLogin.jsp" id="">Voter Login</a></li>
+		<li><a href="adminLogin.html" >Admin Login</a></li>
+		<li><a href="voterRegister.jsp"id="register">Registration</a></li>
+		<li><a href="" id="">Candidate List</a></li>
+		<li><a href="" id="contactUs">Contact Us</a></li>
+		
+       </ul>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div id="login-div">
+
+</div>
+//
+
+<center>
+<div class="container-fluid">
+
+
+<div class="row">
+  <div class="col-md-6">
+  <h2>Admin Login</h2>
+  <form action="AdminController" method="post" style="width:300px">
+  <div class="form-group">
+    <label for="email1">Username</label>
+    <input type="email" class="form-control" name="user" id="email1" placeholder="Username"/>
+  </div>
+  <div class="form-group">
+    <label for="password1">Password</label>
+    <input type="password" class="form-control" name="password" id="password1" placeholder="Password"/>
+  </div>  
+  <button type="submit" class="btn btn-primary">Get In</button>
+</form>
+  
+  </div>
+</center>
+
+</body>
+</html>
